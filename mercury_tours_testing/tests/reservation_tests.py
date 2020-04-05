@@ -1,15 +1,21 @@
 import time
 import unittest
-from mercury_tours_testing.tests.login_tests import LoginTest
+import os.path
+from selenium import webdriver
 
-login = LoginTest()
+my_path = os.path.abspath(os.path.dirname(__file__))
+path = os.path.join(my_path, "../drivers/chromedriver.exe")
 
 
 class FlightFinderTest(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        cls.driver = webdriver.Chrome(executable_path=path)
+        cls.driver.maximize_window()
+
     # Este método realiza la búsqueda de los vuelos para la rutaespecificada
     def test_search_flight(self, desde, hacia, cantidadPasajeros, aerolinea):
-        self.driver = login.driver
         self.driver.find_element_by_xpath(
             "//select[@name='passCount']/option[@value=" + cantidadPasajeros + "]").click()
         self.driver.find_element_by_xpath("//select[@name='fromPort']/option[@value=" + desde + "]").click()
@@ -55,17 +61,19 @@ class FlightFinderTest(unittest.TestCase):
         # time.sleep(5)
 
     def test1_confirmation(self):
-      image =self.driver.find_elements_by_xpath("//img[contains(@src,'/mast_confirmation.gif')]")
-      self.assertTrue(image)
+        image = self.driver.find_elements_by_xpath("//img[contains(@src,'/mast_confirmation.gif')]")
+        self.assertTrue(image)
         # time.sleep(5)
+
     def test1_summary_flight(self):
         image = self.driver.find_elements_by_xpath("//img[contains(@src,'/masts/mast_book.gif')]")
         self.assertTrue(image)
 
     # Este método se ejecuta al final y cierra el navegador
     @classmethod
-    def tearDownClass(self):
-        login.tearDownClass()
+    def tearDownClass(cls):
+        cls.driver.quit()
+        print("prueba completada con éxito")
 
 
 if __name__ == '__main__':
