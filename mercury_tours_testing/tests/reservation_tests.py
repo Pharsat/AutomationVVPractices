@@ -8,7 +8,7 @@ path = os.path.join(my_path, "../drivers/chromedriver.exe")
 
 
 class FlightFinderTest(unittest.TestCase):
-
+    # Este método se ejecuta la primera vez para instanciar el navegador
     @classmethod
     def setUpClass(cls):
         cls.driver = webdriver.Chrome(executable_path=path)
@@ -68,6 +68,16 @@ class FlightFinderTest(unittest.TestCase):
     def test1_summary_flight(self):
         image = self.driver.find_elements_by_xpath("//img[contains(@src,'/masts/mast_book.gif')]")
         self.assertTrue(image)
+
+    # Este método recibe como parámetro la URL del sitio
+    def test_go_url(self, url):
+        self.driver.get(url)
+
+    # Este método recibe como parámetro el login y password y hace clic en el botin Sign - In
+    def test_login(self, user, password):
+        self.driver.find_element_by_name("userName").send_keys(user)
+        self.driver.find_element_by_name("password").send_keys(password)
+        self.driver.find_element_by_name("login").click()
 
     # Este método se ejecuta al final y cierra el navegador
     @classmethod

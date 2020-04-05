@@ -28,7 +28,6 @@ Feature: Buscar vuelos en Mercury Tours
     And Busco vuelos de "<origen>" hacia "<destino>" para "<numpasajero>" pasajeros en la aerolinea "<aerolinea>"
     And Selecciono el vuelo de ida y de regreso
     Then Se despliega la pagina de reserva del vuelo
-
     Examples:
       | origen | destino   | numpasajero | aerolinea           |
       | London | Frankfurt | 1           | Blue Skies Airlines |
