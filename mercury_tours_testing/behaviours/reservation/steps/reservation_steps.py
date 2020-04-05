@@ -1,5 +1,4 @@
 from behave import *
-from mercury_tours_testing.tests.login_tests import LoginTest
 from mercury_tours_testing.tests.reservation_tests import FlightFinderTest
 
 flightFinderTest = FlightFinderTest()
