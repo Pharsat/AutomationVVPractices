@@ -1,6 +1,6 @@
 import time
 import unittest
-from mercury_tours_testing.tests.login import LoginTest
+from mercury_tours_testing.tests.login_tests import LoginTest
 
 login = LoginTest()
 
