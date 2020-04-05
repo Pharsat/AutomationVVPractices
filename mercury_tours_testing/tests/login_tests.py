@@ -1,14 +1,17 @@
 import time
 import unittest
+import os.path
 from selenium import webdriver
+
+my_path = os.path.abspath(os.path.dirname(__file__))
+path = os.path.join(my_path, "../drivers/chromedriver.exe")
 
 
 class LoginTest(unittest.TestCase):
     # Este método se ejecuta la primera vez para instanciar el navegador
     @classmethod
     def setUpClass(cls):
-        cls.driver = webdriver.Chrome(
-            executable_path="C:\Oscar\Cursos\U\Verificacion y validacion\ApiTesting\venv\ui_testing\drivers\chromedriver.exe")
+        cls.driver = webdriver.Chrome(executable_path=path)
         cls.driver.maximize_window()
 
     # Este método recibe como parámetro la URL del sitio
